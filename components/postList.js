@@ -1,6 +1,6 @@
 import { gql, useQuery, NetworkStatus } from '@apollo/client'
 import Link from 'next/link';
-import ErrorMessage from './ErrorMessage'
+import ErrorMessage from './errorMessage'
 
 export const ALL_POSTS_QUERY = gql`
 	query GetPostsByAuthor($first: Int!, $skip: Int!) {

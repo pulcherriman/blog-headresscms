@@ -1,10 +1,10 @@
-import App from '../components/App'
-import Header from '../components/Header'
+import App from '../components/app'
+import Header from '../components/header'
 import PostList, {
 	ALL_POSTS_QUERY,
 	allPostsQueryVars
-} from '../components/PostList'
-import Footer from '../components/Footer'
+} from '../components/postList'
+import Footer from '../components/footer'
 
 import { initializeApollo, addApolloState } from '../src/lib/apollo-client'
 
