@@ -62,7 +62,7 @@ export default function PostList() {
 				<li key={post.id}>
 					<div>
 						<span>{index + 1}. </span>
-						<Link href="/">
+						<Link href="/default">
 						<a>{post.title}</a>
 						</Link>
 						<p>{post.content}</p>
