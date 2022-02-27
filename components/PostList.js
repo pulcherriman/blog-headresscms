@@ -1,4 +1,5 @@
 import { gql, useQuery, NetworkStatus } from '@apollo/client'
+import Link from 'next/link';
 import ErrorMessage from './ErrorMessage'
 
 export const ALL_POSTS_QUERY = gql`
@@ -61,7 +62,9 @@ export default function PostList() {
 				<li key={post.id}>
 					<div>
 						<span>{index + 1}. </span>
-						<a href='/'>{post.title}</a>
+						<Link href="/">
+						<a>{post.title}</a>
+						</Link>
 						<p>{post.content}</p>
 					</div>
 				</li>
