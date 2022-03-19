@@ -25,9 +25,11 @@ export const ALL_POSTS_QUERY = gql`
 	}
 `;
 
+const PAR_PAGE = 1;
+
 export const allPostsQueryVars = {
 	skip: 0,
-	first: 1,
+	first: PAR_PAGE,
 }
 
 export default function PostList() {
@@ -35,11 +37,19 @@ export default function PostList() {
 		ALL_POSTS_QUERY,
 		{
 			variables: allPostsQueryVars,
-			notifyOnNetworkStatusChange: true,
+			notifyOnNetworkStatusChange: true
 		}
 	)
 
+
 	const loadingMorePosts = networkStatus === NetworkStatus.fetchMore
+
+
+	if (error) return <ErrorMessage message="Error loading posts." />
+	if (loading && !loadingMorePosts) return <div>Loading</div>
+
+	const { posts, postsConnection } = data
+	const areMorePosts = posts.length < postsConnection.aggregate.count
 
 	const loadMorePosts = () => {
 		fetchMore({
@@ -49,12 +59,6 @@ export default function PostList() {
 		})
 	}
 
-	if (error) return <ErrorMessage message="Error loading posts." />
-	if (loading && !loadingMorePosts) return <div>Loading</div>
-
-	const { posts, postsConnection } = data
-	const areMorePosts = posts.length < postsConnection.aggregate.count
-
 	return (
 		<section>
 			<ul>
@@ -62,7 +66,7 @@ export default function PostList() {
 				<li key={post.id}>
 					<div>
 						<span>{index + 1}. </span>
-						<Link href="/default">
+						<Link href={'/posts/' + post.id}>
 						<a>{post.title}</a>
 						</Link>
 						<p>{post.content}</p>

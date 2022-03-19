@@ -1,29 +1,73 @@
 import { useMemo } from 'react'
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import { concatPagination } from '@apollo/client/utilities'
+import { offsetLimitPagination } from '@apollo/client/utilities'
 import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
+import { ApolloLink } from "@apollo/client";
+import { onError } from "apollo-link-error";
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient
 
+function createIsomorphLink() {
+	// httpLink
+	const httpLink = new HttpLink({
+		uri: process.env.NEXT_PUBLIC_API_ORIGIN, // Server URL (must be absolute)
+		credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+	});
+	// errorLink
+	const errorLink = onError(({ graphQLErrors, networkError }) => {
+		if (graphQLErrors)
+		graphQLErrors.map(({ message, locations, path }) =>
+			console.log(
+			`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+			)
+		);
+		if (networkError) console.log(`[Network error]: ${networkError}`);
+	});
+	return ApolloLink.from([errorLink, httpLink]);
+}
+
+function createInMemoryCache() {
+	const cache = new InMemoryCache({
+		typePolicies: {
+			Query: {
+				fields: {
+					posts: {
+						keyArgs: false,
+						merge(existing, incoming, { readField }) {
+							const merged = { ...existing };
+							incoming.forEach(item => {
+								merged[readField("id", item)] = item;
+							});
+							return merged;
+						},
+						read(existing) {
+							return existing && Object.values(existing);
+						},
+					}
+				},
+			},
+		},
+	});
+	if (typeof window !== 'undefined') {
+		return cache.restore(window.__APOLLO_STATE__);
+	}
+	return cache;
+}
+
 function createApolloClient() {
 	return new ApolloClient({
 		ssrMode: typeof window === 'undefined',
-		link: new HttpLink({
-			uri: process.env.NEXT_PUBLIC_API_ORIGIN, // Server URL (must be absolute)
-			credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-		}),
-		cache: new InMemoryCache({
-			typePolicies: {
-				Query: {
-					fields: {
-						posts: concatPagination(),
-					},
-				},
+		link: createIsomorphLink(),
+		cache: createInMemoryCache(),
+		ssrForceFetchDelay: 100,
+		defaultOptions: {
+			watchQuery: {
+			 	fetchPolicy: 'cache-and-network'
 			},
-		}),
+		},
 	})
 }
 

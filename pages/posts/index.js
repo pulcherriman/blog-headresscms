@@ -1,12 +1,11 @@
-import App from '../components/app'
-import Header from '../components/header'
+import App from '../../components/app'
+import Header from '../../components/header'
 import PostList, {
 	ALL_POSTS_QUERY,
 	allPostsQueryVars
-} from '../components/postList'
-import Footer from '../components/footer'
-
-import { initializeApollo, addApolloState } from '../src/lib/apollo-client'
+} from '../../components/postList'
+import Footer from '../../components/footer'
+import { initializeApollo, addApolloState } from '../../src/lib/apollo-client'
 
 
 const IndexPage = () => (
@@ -25,10 +24,10 @@ export async function getStaticProps() {
 		variables: allPostsQueryVars,
 	})
 	
-	return addApolloState(apolloClient, {
+	return {
 		props: {},
 		revalidate: 1,
-	})
+	}
 }
 
 export default IndexPage
