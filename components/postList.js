@@ -1,6 +1,11 @@
 import { gql, useQuery, NetworkStatus } from '@apollo/client'
 import Link from 'next/link';
 import ErrorMessage from './errorMessage'
+import Loading from './loading'
+import React from 'react';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Pressable } from 'react-native-web';
+import {CardLink} from './Card'
+import Button from './Button'
 
 export const ALL_POSTS_QUERY = gql`
 	query GetPostsByAuthor($first: Int!, $skip: Int!) {
@@ -11,10 +16,10 @@ export const ALL_POSTS_QUERY = gql`
 			createdAt
 			updatedAt
 			createdBy {
-				id
+				name
 			}
 			author {
-				id
+				name
 			}
 		}
 		postsConnection {
@@ -25,7 +30,7 @@ export const ALL_POSTS_QUERY = gql`
 	}
 `;
 
-const PAR_PAGE = 1;
+const PAR_PAGE = 3;
 
 export const allPostsQueryVars = {
 	skip: 0,
@@ -41,15 +46,13 @@ export default function PostList() {
 		}
 	)
 
-
-	const loadingMorePosts = networkStatus === NetworkStatus.fetchMore
-
+	const loadingMorePosts = networkStatus === NetworkStatus.fetchMore;
 
 	if (error) return <ErrorMessage message="Error loading posts." />
-	if (loading && !loadingMorePosts) return <div>Loading</div>
+	if (!data && loading && !loadingMorePosts) return <Loading />
 
-	const { posts, postsConnection } = data
-	const areMorePosts = posts.length < postsConnection.aggregate.count
+	const { posts, postsConnection } = data;
+	const areMorePosts = posts.length < postsConnection.aggregate.count;
 
 	const loadMorePosts = () => {
 		fetchMore({
@@ -57,68 +60,39 @@ export default function PostList() {
 				skip: posts.length,
 			}
 		})
-	}
+	};
+
+	const dateStringToRelative = (date) => {
+		const dateDiff = (new Date(date)).getDate() - (new Date()).getDate();
+		return new Intl.RelativeTimeFormat('ja', {
+			numeric: 'auto',
+		}).format(dateDiff, "day") + ` (${(new Date(date)).toLocaleString('ja')})`;
+	};
+
+	const renderItem = ({ item }) => (
+		<CardLink
+			href={`/posts/${item.id}`}
+			title={item.title}
+			information={dateStringToRelative(item.createdAt)}
+			content={item.content} />
+	);
+
 
 	return (
 		<section>
-			<ul>
-			{posts.map((post, index) => (
-				<li key={post.id}>
-					<div>
-						<span>{index + 1}. </span>
-						<Link href={'/posts/' + post.id}>
-						<a>{post.title}</a>
-						</Link>
-						<p>{post.content}</p>
-					</div>
-				</li>
-			))}
-			</ul>
+			<SafeAreaView>
+				<FlatList
+					data={posts}
+					renderItem={renderItem}
+					keyExtractor={item => item.id}
+				/>
+			</SafeAreaView>
 
 			{areMorePosts && (
-				<button onClick={() => loadMorePosts()} disabled={loadingMorePosts}>
-					{loadingMorePosts ? 'Loading...' : 'Show More'}
-				</button>
+				<Button onClick={() => loadMorePosts()} disabled={loadingMorePosts}>
+					{loadingMorePosts ? '読み込み中...' : 'もっと見る'}
+				</Button>
 			)}
-
-			<style jsx>{`
-			section {
-				padding-bottom: 20px;
-			}
-			li {
-				display: block;
-				margin-bottom: 10px;
-			}
-			div {
-				align-items: center;
-				display: flex;
-			}
-			a {
-				font-size: 14px;
-				margin-right: 10px;
-				text-decoration: none;
-				padding-bottom: 0;
-				border: 0;
-			}
-			span {
-				font-size: 14px;
-				margin-right: 5px;
-			}
-			ul {
-				margin: 0;
-				padding: 0;
-			}
-			button:before {
-				align-self: center;
-				border-style: solid;
-				border-width: 6px 4px 0 4px;
-				border-color: #ffffff transparent transparent transparent;
-				content: '';
-				height: 0;
-				margin-right: 5px;
-				width: 0;
-			}
-			`}</style>
 		</section>
-	)
+	);
 }

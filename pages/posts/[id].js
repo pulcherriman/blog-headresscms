@@ -1,15 +1,11 @@
 import App from '../../components/app'
-import Header from '../../components/header'
 import PostShow from '../../components/postShow'
-import Footer from '../../components/footer'
 import { initializeApollo, addApolloState } from '../../src/lib/apollo-client'
 import { gql, query, useQuery, NetworkStatus } from '@apollo/client'
 
 const ShowPage = ({ id }) => (
 	<App>
-		<Header />
 		<PostShow id={ id } />
-		<Footer />
 	</App>
 )
 

@@ -35,7 +35,7 @@ function createInMemoryCache() {
 			Query: {
 				fields: {
 					posts: {
-						keyArgs: false,
+						keyArgs: ['id'],
 						merge(existing, incoming, { readField }) {
 							const merged = { ...existing };
 							incoming.forEach(item => {
