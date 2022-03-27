@@ -53,7 +53,7 @@ export async function getStaticProps({ params }) {
 		props: {
 			id : params.id
 		},
-		revalidate: 1,
+		revalidate: 10,
 	})
 }
 
