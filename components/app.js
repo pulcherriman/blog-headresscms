@@ -18,6 +18,10 @@ export default function App({ children }) {
 			button {
 				cursor:pointer;
 			}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
 
 			/* icon設定 */
 			@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
