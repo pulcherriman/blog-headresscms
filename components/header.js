@@ -21,9 +21,8 @@ const HeaderStyles = styled.header`
 `;
 
 const HeaderTextStyle = css`
-	@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru@700&display=swap');
 	font-size: 1.5rem;
 	font-weight: 700;
-	font-family: "Kosugi Maru", "ヒラギノ丸ゴ Pro W4","ヒラギノ丸ゴ Pro","Hiragino Maru Gothic Pro","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","HG丸ｺﾞｼｯｸM-PRO","HGMaruGothicMPRO";
+	font-family: "ヒラギノ丸ゴ Pro W4","ヒラギノ丸ゴ Pro","Hiragino Maru Gothic Pro","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","HG丸ｺﾞｼｯｸM-PRO","HGMaruGothicMPRO";
 `;
 
