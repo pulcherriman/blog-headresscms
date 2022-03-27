@@ -1,9 +1,7 @@
 import { gql, useQuery, NetworkStatus } from '@apollo/client'
-import Link from 'next/link';
 import ErrorMessage from './errorMessage'
 import Loading from './loading'
-import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Pressable } from 'react-native-web';
+import { SafeAreaView, FlatList } from 'react-native-web';
 import {CardLink} from './card'
 import Button from './button'
 

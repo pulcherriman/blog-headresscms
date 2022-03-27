@@ -5,7 +5,8 @@ import Link from 'next/link';
 export default function Header() {
 	return (
 		<HeaderStyles>
-			<Link href="/" passHref><a css={HeaderTextStyle}>ぷるまんのブログ（工事中）</a></Link>
+			{/* <Link href="/" passHref><a css={HeaderTextStyle}>ぷるまんのブログ（工事中）</a></Link> */}
+			<a href="/" css={HeaderTextStyle}>ぷるまんのブログ（工事中）</a>
 		</HeaderStyles>
 	)
 }
