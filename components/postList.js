@@ -4,8 +4,8 @@ import ErrorMessage from './errorMessage'
 import Loading from './loading'
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Pressable } from 'react-native-web';
-import {CardLink} from './Card'
-import Button from './Button'
+import {CardLink} from './card'
+import Button from './button'
 
 export const ALL_POSTS_QUERY = gql`
 	query GetPostsByAuthor($first: Int!, $skip: Int!) {
