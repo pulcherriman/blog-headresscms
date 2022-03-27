@@ -21,6 +21,10 @@ export default function App({ children }) {
 					color: inherit;
 					text-decoration: none;
 				}
+				main {
+					max-width: 1200px;
+					margin: 0 auto;
+				}
 
 				/* icon設定 */
 				@import url('https://fonts.googleapis.com/icon?family=Material+Icons');

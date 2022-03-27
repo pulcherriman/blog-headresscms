@@ -37,6 +37,7 @@ const CardBase = css`
 	text-align: left;
 	transition: all .3s;
 	hr{
+		margin-top: 0px;
 		border-color: #ccc;
 		border-width: 1px 0 0 0;
 	}
@@ -91,12 +92,27 @@ const CardReactive = styled.a`
 
 const CardTitle = styled.span`
 	font-size: 1.2em;
+	display: inline-block;
+	max-width: calc(100% - 4.8em);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	@media screen and (max-width: 479px) {
+		max-width: 100%;
+	}
 `;
 
 const CardInformation = styled.span`
-	padding-left: 3em;
+	width: 6em;
 	font-size: 0.8em;
 	color: #999;
+	white-space: nowrap;
+	display: inline-block;
+	text-align: right;
+	vertical-align: 0.5em;
+	@media screen and (max-width: 479px) {
+		display: none;
+	}
 `;
 
 const CardContent = styled.div`

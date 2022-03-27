@@ -15,12 +15,6 @@ export const ALL_POSTS_QUERY = gql`
 			content
 			createdAt
 			updatedAt
-			createdBy {
-				name
-			}
-			author {
-				name
-			}
 		}
 		postsConnection {
 			aggregate {
@@ -66,7 +60,7 @@ export default function PostList() {
 		const dateDiff = (new Date(date)).getDate() - (new Date()).getDate();
 		return new Intl.RelativeTimeFormat('ja', {
 			numeric: 'auto',
-		}).format(dateDiff, "day") + ` (${(new Date(date)).toLocaleString('ja')})`;
+		}).format(dateDiff, "day");
 	};
 
 	const renderItem = ({ item }) => (
@@ -74,7 +68,7 @@ export default function PostList() {
 			href={`/posts/${item.id}`}
 			title={item.title}
 			information={dateStringToRelative(item.createdAt)}
-			content={item.content} />
+			content = { item.content.substr(0,200) } />
 	);
 
 
