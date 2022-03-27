@@ -1,7 +1,6 @@
 export default function App({ children }) {
 	return (
 		<main>
-			{children}
 			<style jsx global>{`
 				body {
 					margin: 0;
@@ -29,6 +28,7 @@ export default function App({ children }) {
 					vertical-align: -0.125em;
 				}
 			`}</style>
+			{children}
 		</main>
 	)
 }

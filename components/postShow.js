@@ -22,7 +22,7 @@ export default function PostShow({ id }) {
 			notifyOnNetworkStatusChange: true,
 		}
 	)
-	if (error) return <ErrorMessage message="記事が読み込めません。" />
+	if (error) return <ErrorMessage message="記事の読み込みに失敗しました。" />
 	if (loading) return <div>Loading</div>
 
 	const post = data.post;

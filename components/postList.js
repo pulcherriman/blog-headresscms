@@ -48,7 +48,7 @@ export default function PostList() {
 
 	const loadingMorePosts = networkStatus === NetworkStatus.fetchMore;
 
-	if (error) return <ErrorMessage message="Error loading posts." />
+	if (error) return <ErrorMessage message="記事の読み込みに失敗しました。" />
 	if (!data && loading && !loadingMorePosts) return <Loading />
 
 	const { posts, postsConnection } = data;
