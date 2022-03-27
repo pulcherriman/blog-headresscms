@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }) {
 				<meta name="description" content="plcherrim の ブログ" />
 				<meta name="google-site-verification" content="Bsx8tHDERBeCX-IuyG1n14Dq8BprmhOm9UlpBUeLA-Y" />
 			</Head>
+			<script> </script>
 			<Header />
 			<Component {...pageProps} />
 			<Footer />
