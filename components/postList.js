@@ -30,7 +30,7 @@ export const ALL_POSTS_QUERY = gql`
 	}
 `;
 
-const PAR_PAGE = 3;
+const PAR_PAGE = 10;
 
 export const allPostsQueryVars = {
 	skip: 0,

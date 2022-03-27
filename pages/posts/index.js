@@ -1,5 +1,5 @@
 import App from '../../components/app'
-import Loading from '../../components/loading'
+import Head from 'next/head'
 import PostList, {
 	ALL_POSTS_QUERY,
 	allPostsQueryVars
@@ -9,6 +9,9 @@ import { initializeApollo, addApolloState } from '../../src/lib/apollo-client'
 
 const IndexPage = () => (
 	<App>
+		<Head>
+			<title>ぷるまんのブログ</title>
+		</Head>
 		<PostList />
 	</App>
 )
