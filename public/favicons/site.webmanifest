@@ -3,17 +3,17 @@
     "short_name": "\u3077\u308b\u30d6",
     "icons": [
         {
-            "src": "/android-chrome-192x192.png",
+            "src": "/favicons/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/android-chrome-512x512.png",
+            "src": "/favicons/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
     ],
     "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "background_color": "#5cb85c",
     "display": "standalone"
 }
