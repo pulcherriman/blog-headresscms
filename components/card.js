@@ -29,7 +29,7 @@ export function CardLink({ href, title, information, content }) {
 const CardBase = css`
 	margin-bottom: 1em;
 	position: relative;
-	display: inline-block;
+	display: block;
 	padding: 1em 2em;
 	border: 2px solid #ccc;
 	border-radius: 8px;
