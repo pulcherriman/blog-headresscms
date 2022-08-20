@@ -15,6 +15,7 @@ export default function Document() {
 				<meta name="theme-color" content="#ffffff" />
 			</Head>
 			<body>
+				<script> </script>
 				<Main />
 				<NextScript />
 			</body>
