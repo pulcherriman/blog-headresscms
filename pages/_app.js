@@ -5,7 +5,7 @@ import Footer from '../components/footer'
 import Head from 'next/head'
 
 export default function App({ Component, pageProps }) {
-	const apolloClient = useApollo(pageProps)
+	const apolloClient = useApollo(pageProps);
 
 	return (
 		<ApolloProvider client={apolloClient}>
