@@ -89,12 +89,14 @@ export default function PostList() {
 		})
 	};
 
+	const items = posts.map((item) => renderItem({ item }));
+
 
 
 	return (
 		<section>
 			<ul style={{ "padding-left" : "0px" }}>
-				{posts.map((item) => renderItem({ item }))}
+				{items}
 			</ul>
 
 			{areMorePosts && (
